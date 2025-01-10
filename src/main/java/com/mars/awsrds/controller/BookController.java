@@ -24,6 +24,6 @@ public class BookController {
     //Add a health check endpoint
     @GetMapping("/health")
     public String healthCheck() {
-        return "I'm Up and Healthy!";
+        return "I'm Up version 2!";
     }
 }
