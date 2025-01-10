@@ -20,4 +20,10 @@ public class BookController {
                 new Book("Spring in Action", "Craig Walls", 39.99),
                 new Book("Clean Code", "Robert C. Martin", 49.99));
     }
+
+    //Add a health check endpoint
+    @GetMapping("/health")
+    public String healthCheck() {
+        return "I'm Up and Healthy!";
+    }
 }
