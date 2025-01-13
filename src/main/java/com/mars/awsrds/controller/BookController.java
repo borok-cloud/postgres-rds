@@ -32,7 +32,7 @@ public class BookController {
     @GetMapping("/health")
     public String healthCheck() {
         logger.info("Health check");
-        return "I'm Up version 3!";
+        return "I'm Up version latest!";
     }
 
 
