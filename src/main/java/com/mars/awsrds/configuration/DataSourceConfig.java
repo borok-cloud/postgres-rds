@@ -1,5 +1,6 @@
 package com.mars.awsrds.configuration;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.rds.RdsUtilities;
@@ -7,7 +8,7 @@ import software.amazon.awssdk.services.rds.RdsUtilities;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-//@Configuration
+@Configuration
 public class DataSourceConfig {
 
    // @Bean
