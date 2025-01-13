@@ -1,5 +1,5 @@
 # Use office jdk17 image
-FROM openjdk:17
+FROM openjdk:17-jdk-alpine
 # set the working directory in the container
 WORKDIR /usr/app
 #copy the compiled java jar file to the working directory into the container
