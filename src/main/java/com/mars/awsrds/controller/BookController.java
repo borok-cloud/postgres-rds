@@ -10,15 +10,15 @@ import java.util.List;
 @RestController
 public class BookController {
 
-//    @Autowired
-//    private BookRepository bookRepository;
+    @Autowired
+    private BookRepository bookRepository;
 
     @GetMapping("/books")
     public List<Book> getAllBooks() {
-        //return bookRepository.findAll();
-        return List.of(new Book("Effective Java", "Joshua Bloch", 45.99),
-                new Book("Spring in Action", "Craig Walls", 39.99),
-                new Book("Clean Code", "Robert C. Martin", 49.99));
+        return bookRepository.findAll();
+//        return List.of(new Book("Effective Java", "Joshua Bloch", 45.99),
+//                new Book("Spring in Action", "Craig Walls", 39.99),
+//                new Book("Clean Code", "Robert C. Martin", 49.99));
     }
 
     //Add a health check endpoint
