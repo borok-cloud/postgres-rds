@@ -9,7 +9,7 @@ import software.amazon.awssdk.services.rds.RdsUtilities;
 
 import javax.sql.DataSource;
 
-@Configuration
+//@Configuration
 public class DataSourceConfig {
     private static final Logger logger = LoggerFactory.getLogger(DataSourceConfig.class);
 
