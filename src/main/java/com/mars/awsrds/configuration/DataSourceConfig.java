@@ -1,15 +1,17 @@
 package com.mars.awsrds.configuration;
 
+import org.postgresql.ds.PGSimpleDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.rds.RdsUtilities;
 
 import javax.sql.DataSource;
-import java.util.Properties;
 
 @Configuration
 public class DataSourceConfig {
+    private static final Logger logger = LoggerFactory.getLogger(DataSourceConfig.class);
 
    // @Bean
     public DataSource dataSource() {
@@ -30,25 +32,30 @@ public class DataSourceConfig {
                         .username(dbUsername)
                 );
 
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl(String.format("jdbc:postgresql://%s:%d/%s", dbEndpoint, port, database));
-        dataSource.setUsername(dbUsername);
-        dataSource.setPassword(iamAuthToken);
 
-//        PGSimpleDataSource dataSource = new PGSimpleDataSource();
-//        dataSource.setUrl("jdbc:postgresql://" + dbEndpoint + ":5432/"+database);
-//        dataSource.setUser(dbUsername);
+        logger.info("Retrieved IAM Auth Token: {}", iamAuthToken);
+
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName("org.postgresql.Driver");
+//        dataSource.setUrl(String.format("jdbc:postgresql://%s:%d/%s", dbEndpoint, port, database));
+//        dataSource.setUsername(dbUsername);
 //        dataSource.setPassword(iamAuthToken);
 
+        PGSimpleDataSource dataSource = new PGSimpleDataSource();
+        dataSource.setUrl("jdbc:postgresql://" + dbEndpoint + ":5432/"+database);
+        dataSource.setUser(dbUsername);
+        dataSource.setPassword(iamAuthToken);
+        logger.info("DataSource created successfully");
         // Additional properties for PostgreSQL SSL and IAM
-        Properties props = new Properties();
-        props.setProperty("ssl", "true");
-        props.setProperty("sslmode", "verify-full");
-        props.setProperty("sslrootcert", "us-east-1-bundle.pem"); // Ensure this cert is in your classpath
-        dataSource.setConnectionProperties(props);
+//        Properties props = new Properties();
+//        props.setProperty("ssl", "true");
+//        props.setProperty("sslmode", "verify-full");
+//        props.setProperty("sslrootcert", "us-east-1-bundle.pem"); // Ensure this cert is in your classpath
+//        dataSource.setConnectionProperties(props);
 
         return dataSource;
         //return null;
     }
+
+
 }
